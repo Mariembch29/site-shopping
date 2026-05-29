@@ -31,24 +31,18 @@ h3{
      background-color: rgb(235, 232, 236);
  }
 
-  .top {
+ .top {
+    background: #c9a8e0;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    background-color: #d8b4d8;
-  }
-  
-  .top {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #d8b4d8;
+    padding: 12px 24px;
+    gap: 16px;
   }
   
   .top a.actif {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
-    color: purple;
+    color: #4a1b6e;
     text-decoration: none;
   }
   
@@ -73,10 +67,10 @@ h3{
   }
   
   .top-right input {
-    padding: 8px 12px;
+    padding: 8px 14px;
     border: none;
     font-size: 14px;
     outline: none;
-    width: 300px;
+    width: 220px;
   }
   

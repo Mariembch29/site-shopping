@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="top">
+      <a class="actif" href="shopping.html">store</a>
+      <div class="top-right">
+        <select onchange="window.location.href=this.value">
+          <option value="shopping.html">skin care</option>
+          <option value="makeup.html" selected>make up</option>
+          <option value="shopping.html">clothes</option>
+          <option value="shopping.html">socks</option>
+        </select>
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <h3>Catégories</h3>
+        <ul id="catList">
+          <li class="active" onclick="showCat('fond', this)">Fond de teint</li>
+          <li onclick="showCat('rouge', this)">Rouge à lèvres</li>
+          <li onclick="showCat('mascara', this)">Mascara</li>
+          <li onclick="showCat('eyeliner', this)">Eyeliner</li>
+          <li onclick="showCat('blush', this)">Blush</li>
+          <li onclick="showCat('ombre', this)">Ombre à paupières</li>
+          <li onclick="showCat('correcteur', this)">Correcteur</li>
+          <li onclick="showCat('bronzer', this)">Bronzer</li>
+          <li onclick="showCat('poudre', this)">Poudre</li>
+          <li onclick="showCat('highlighter', this)">Highlighter</li>
+        </ul>
+      </div>
+
+      <!-- MAIN -->
+      <div class="main">
+        <h2 id="catTitle">Fond de teint</h2>
+        <div class="grid" id="productGrid"></div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 Mimi Shopping — Tous droits réservés</footer>
+
+    <script>
+      const products = {
+        fond: [
+          {
+            brand: "L'Oréal",
+            name: "Infaillible 24H",
+            price: "42.99",
+            img: "images/fond1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Fit Me Matte",
+            price: "38.99",
+            img: "images/fond2.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Studio Fix Fluid",
+            price: "89.99",
+            img: "images/fond3.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "Can't Stop Won't Stop",
+            price: "45.99",
+            img: "images/fond4.jpg",
+          },
+        ],
+        rouge: [
+          {
+            brand: "L'Oréal",
+            name: "Color Riche",
+            price: "24.99",
+            img: "images/rouge1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "SuperStay 24H",
+            price: "22.99",
+            img: "images/rouge2.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "Soft Matte Lip",
+            price: "19.99",
+            img: "images/rouge3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Retro Matte",
+            price: "69.99",
+            img: "images/rouge4.jpg",
+          },
+        ],
+        mascara: [
+          {
+            brand: "L'Oréal",
+            name: "Voluminous",
+            price: "29.99",
+            img: "images/mascara1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Sky High",
+            price: "27.99",
+            img: "images/mascara2.jpg",
+          },
+          {
+            brand: "Rimmel",
+            name: "Scandal Eyes",
+            price: "24.99",
+            img: "images/mascara3.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "On the Rise",
+            price: "26.99",
+            img: "images/mascara4.jpg",
+          },
+        ],
+        eyeliner: [
+          {
+            brand: "NYX",
+            name: "Epic Ink Liner",
+            price: "22.99",
+            img: "images/eyeliner1.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "Super Liner",
+            price: "19.99",
+            img: "images/eyeliner2.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Hyper Precise",
+            price: "21.99",
+            img: "images/eyeliner3.jpg",
+          },
+          {
+            brand: "Rimmel",
+            name: "Exaggerate",
+            price: "18.99",
+            img: "images/eyeliner4.jpg",
+          },
+        ],
+        blush: [
+          {
+            brand: "NYX",
+            name: "Sweet Cheeks",
+            price: "28.99",
+            img: "images/blush1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Cheek Heat",
+            price: "24.99",
+            img: "images/blush2.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "True Match Blush",
+            price: "26.99",
+            img: "images/blush3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Powder Blush",
+            price: "59.99",
+            img: "images/blush4.jpg",
+          },
+        ],
+        ombre: [
+          {
+            brand: "Maybelline",
+            name: "The Nudes",
+            price: "34.99",
+            img: "images/ombre1.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "Ultimate Shadow",
+            price: "39.99",
+            img: "images/ombre2.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "Color Appeal",
+            price: "32.99",
+            img: "images/ombre3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Eye Shadow x9",
+            price: "99.99",
+            img: "images/ombre4.jpg",
+          },
+        ],
+        correcteur: [
+          {
+            brand: "Maybelline",
+            name: "Instant Age Rewind",
+            price: "29.99",
+            img: "images/correcteur1.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "True Match",
+            price: "27.99",
+            img: "images/correcteur2.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "HD Photogenic",
+            price: "24.99",
+            img: "images/correcteur3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Select Cover Up",
+            price: "64.99",
+            img: "images/correcteur4.jpg",
+          },
+        ],
+        bronzer: [
+          {
+            brand: "NYX",
+            name: "Highlight & Contour",
+            price: "32.99",
+            img: "images/bronzer1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Face Studio",
+            price: "28.99",
+            img: "images/bronzer2.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "Glam Bronze",
+            price: "31.99",
+            img: "images/bronzer3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Bronzing Powder",
+            price: "74.99",
+            img: "images/bronzer4.jpg",
+          },
+        ],
+        poudre: [
+          {
+            brand: "L'Oréal",
+            name: "True Match Powder",
+            price: "29.99",
+            img: "images/poudre1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Fit Me Powder",
+            price: "24.99",
+            img: "images/poudre2.jpg",
+          },
+          {
+            brand: "NYX",
+            name: "Stay Matte",
+            price: "22.99",
+            img: "images/poudre3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Studio Fix Powder",
+            price: "79.99",
+            img: "images/poudre4.jpg",
+          },
+        ],
+        highlighter: [
+          {
+            brand: "NYX",
+            name: "Born To Glow",
+            price: "29.99",
+            img: "images/highlight1.jpg",
+          },
+          {
+            brand: "Maybelline",
+            name: "Master Chrome",
+            price: "26.99",
+            img: "images/highlight2.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "Glow Mon Amour",
+            price: "31.99",
+            img: "images/highlight3.jpg",
+          },
+          {
+            brand: "MAC",
+            name: "Strobe Cream",
+            price: "84.99",
+            img: "images/highlight4.jpg",
+          },
+        ],
+      };
+
+      const titles = {
+        fond: "Fond de teint",
+        rouge: "Rouge à lèvres",
+        mascara: "Mascara",
+        eyeliner: "Eyeliner",
+        blush: "Blush",
+        ombre: "Ombre à paupières",
+        correcteur: "Correcteur",
+        bronzer: "Bronzer",
+        poudre: "Poudre",
+        highlighter: "Highlighter",
+      };
+
+      function showCat(key, el) {
+        document
+          .querySelectorAll(".sidebar li")
+          .forEach((li) => li.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("catTitle").textContent = titles[key];
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products[key]
+          .map(
+            (p) => `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}" onerror="this.style.background='#f0e8f5';this.style.height='180px'" />
+          <div class="card-body">
+            <div class="card-brand">${p.brand}</div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-price">${p.price} DT</div>
+            <a href="#" class="card-btn">Ajouter au panier</a>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      // Afficher fond de teint au chargement
+      showCat("fond", document.querySelector(".sidebar li"));
+    </script>
+  </body>
+</html>
