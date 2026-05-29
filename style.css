@@ -2,34 +2,12 @@
     box-sizing: border-box;
 }
 body{
-    background-color: rgb(200, 181, 209);
+    background-color: rgb(230, 224, 233);
     font-family: sans-serif;
 }
 h3{
     color: black;
 }
-
-.top{
-    overflow: hidden;
-    background-color: rgb(187, 187, 202);
-    padding: 10px;
-    
-}
-.top a{
-    float: left;
-    display: block;
-    color: blueviolet;
-    text-align: center;
-    padding: 14px 16px ;
-    text-decoration: none;
-    font-size: 1.2rem;
-    text-transform:uppercase;
-
-}
- .top .search{
-     float: right;
-
- }
 
  form{
      background-color: rgb(218, 223, 213);
@@ -37,20 +15,12 @@ h3{
      height: 43px;
      border-radius: 11px;
      display: flex;
-     alight-items:center;
+     align-items:center;
 
- }
- input{
-     all:unset;
-     font: 15px system_ui;
-     color: rgb(14, 12, 12) ;
-     height: 100%;
-     width: 100%;
-     padding: 6px 9px ;
  }
  .tul{
      height: 350px;
-     width:300px ;
+     width:500px ;
      border-radius:19px ;
 
  }
@@ -58,5 +28,55 @@ h3{
      border-radius:19px;
      padding:15px;
      text-align: center;
-     background-color: rgb(171, 193, 194);
+     background-color: rgb(235, 232, 236);
  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #d8b4d8;
+  }
+  
+  .top {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #d8b4d8;
+  }
+  
+  .top a.actif {
+    font-size: 22px;
+    font-weight: bold;
+    color: purple;
+    text-decoration: none;
+  }
+  
+  .top-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .top-right select {
+    padding: 8px 12px;
+    border: none;
+    border-right: 1px solid #ccc;
+    font-size: 14px;
+    background: white;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .top-right input {
+    padding: 8px 12px;
+    border: none;
+    font-size: 14px;
+    outline: none;
+    width: 300px;
+  }
+  
