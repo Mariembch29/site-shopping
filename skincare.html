@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skin Care - Mimi Shopping</title>
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <div class="top">
+      <a class="actif" href="shopping.html">store</a>
+      <div class="top-right">
+        <select onchange="window.location.href=this.value">
+          <option value="skincare.html" selected>skin care</option>
+          <option value="makeup.html">make up</option>
+          <option value="shopping.html">clothes</option>
+          <option value="shopping.html">socks</option>
+        </select>
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <h3>Catégories</h3>
+        <ul>
+          <li class="active" onclick="showCat('creme', this)">
+            Crème hydratante
+          </li>
+          <li onclick="showCat('serum', this)">Sérum</li>
+          <li onclick="showCat('gel', this)">Gel nettoyant</li>
+          <li onclick="showCat('masque', this)">Masque</li>
+          <li onclick="showCat('solaire', this)">Crème solaire</li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <h2 id="catTitle">Crème hydratante</h2>
+        <div class="grid" id="productGrid"></div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 Mimi Shopping — Tous droits réservés</footer>
+
+    <script>
+      const products = {
+        creme: [
+          {
+            brand: "Neutrogena",
+            name: "Hydro Boost",
+            price: "49.99",
+            img: "images/creme1.jpg",
+          },
+          {
+            brand: "CeraVe",
+            name: "Moisturizing Cream",
+            price: "44.99",
+            img: "images/creme2.jpg",
+          },
+          {
+            brand: "L'Oréal",
+            name: "Revitalift",
+            price: "39.99",
+            img: "images/creme3.jpg",
+          },
+          {
+            brand: "Nivea",
+            name: "Soft Crème",
+            price: "24.99",
+            img: "images/creme4.jpg",
+          },
+        ],
+        serum: [
+          {
+            brand: "L'Oréal",
+            name: "Revitalift 1.5% Pure",
+            price: "59.99",
+            img: "images/serum1.jpg",
+          },
+          {
+            brand: "Neutrogena",
+            name: "Rapid Wrinkle Repair",
+            price: "54.99",
+            img: "images/serum2.jpg",
+          },
+          {
+            brand: "CeraVe",
+            name: "Vitamin C Serum",
+            price: "49.99",
+            img: "images/serum3.jpg",
+          },
+          {
+            brand: "Vichy",
+            name: "Liftactiv Serum 10",
+            price: "64.99",
+            img: "images/serum4.jpg",
+          },
+        ],
+        gel: [
+          {
+            brand: "CeraVe",
+            name: "Foaming Cleanser",
+            price: "34.99",
+            img: "images/gel1.jpg",
+          },
+          {
+            brand: "Neutrogena",
+            name: "Oil-Free Acne Wash",
+            price: "29.99",
+            img: "images/gel2.jpg",
+          },
+          {
+            brand: "La Roche-Posay",
+            name: "Effaclar Gel",
+            price: "44.99",
+            img: "images/gel3.jpg",
+          },
+          {
+            brand: "Nivea",
+            name: "Daily Essentials",
+            price: "22.99",
+            img: "images/gel4.jpg",
+          },
+        ],
+        masque: [
+          {
+            brand: "L'Oréal",
+            name: "Pure Clay Mask",
+            price: "34.99",
+            img: "images/masque1.jpg",
+          },
+          {
+            brand: "Garnier",
+            name: "Skin Active Mask",
+            price: "19.99",
+            img: "images/masque2.jpg",
+          },
+          {
+            brand: "Neutrogena",
+            name: "Deep Clean Mask",
+            price: "29.99",
+            img: "images/masque3.jpg",
+          },
+          {
+            brand: "Vichy",
+            name: "Pureté Thermale",
+            price: "39.99",
+            img: "images/masque4.jpg",
+          },
+        ],
+        solaire: [
+          {
+            brand: "La Roche-Posay",
+            name: "Anthelios SPF50+",
+            price: "59.99",
+            img: "images/solaire1.jpg",
+          },
+          {
+            brand: "Neutrogena",
+            name: "Ultra Sheer SPF50",
+            price: "44.99",
+            img: "images/solaire2.jpg",
+          },
+          {
+            brand: "Nivea",
+            name: "Sun Protect SPF30",
+            price: "29.99",
+            img: "images/solaire3.jpg",
+          },
+          {
+            brand: "Garnier",
+            name: "Ambre Solaire SPF50",
+            price: "34.99",
+            img: "images/solaire4.jpg",
+          },
+        ],
+      };
+
+      const titles = {
+        creme: "Crème hydratante",
+        serum: "Sérum",
+        gel: "Gel nettoyant",
+        masque: "Masque",
+        solaire: "Crème solaire",
+      };
+
+      function showCat(key, el) {
+        document
+          .querySelectorAll(".sidebar li")
+          .forEach((li) => li.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("catTitle").textContent = titles[key];
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products[key]
+          .map(
+            (p) => `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}" onerror="this.style.background='#f0e8f5';this.style.height='180px'" />
+          <div class="card-body">
+            <div class="card-brand">${p.brand}</div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-price">${p.price} DT</div>
+            <a href="#" class="card-btn">Ajouter au panier</a>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      showCat("creme", document.querySelector(".sidebar li"));
+    </script>
+  </body>
+</html>
