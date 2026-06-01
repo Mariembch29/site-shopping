@@ -6,6 +6,11 @@
   body {
     font-family: Arial, sans-serif;
     background: #f9f4fc;
+    background-image: url('az.jfif');   /* Remplace par ton image */
+        background-size: cover;           /* L'image couvre tout l'écran */
+        background-position: center;      /* Centre l'image */
+        background-repeat: no-repeat;     /* Pas de répétition */
+        background-attachment: fixed; 
   }
 
   .top {
