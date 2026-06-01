@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clothes - Mimi Shopping</title>
+    <link rel="stylesheet" href="style4.css" />
+  </head>
+  <body>
+    <div class="top">
+      <a class="actif" href="shopping.html">store</a>
+      <div class="top-right">
+        <select onchange="window.location.href=this.value">
+          <option value="skincare.html">skin care</option>
+          <option value="makeup.html">make up</option>
+          <option value="clothes.html" selected>clothes</option>
+          <option value="socks.html">socks</option>
+        </select>
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <h3>Catégories</h3>
+        <ul>
+          <li class="active" onclick="showCat('robes', this)">Robes</li>
+          <li onclick="showCat('tshirts', this)">T-shirts</li>
+          <li onclick="showCat('pantalons', this)">Pantalons</li>
+          <li onclick="showCat('vestes', this)">Vestes</li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <h2 id="catTitle">Robes</h2>
+        <div class="grid" id="productGrid"></div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 Mimi Shopping — Tous droits réservés</footer>
+
+    <script>
+      const products = {
+        robes: [
+          {
+            brand: "Zara",
+            name: "Robe d'été fleurie",
+            price: "89.99",
+            img: "images/robe1.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Robe midi",
+            price: "59.99",
+            img: "images/robe2.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Robe wrap",
+            price: "99.99",
+            img: "images/robe3.jpg",
+          },
+          {
+            brand: "Shein",
+            name: "Robe casual",
+            price: "34.99",
+            img: "images/robe4.jpg",
+          },
+        ],
+        tshirts: [
+          {
+            brand: "Zara",
+            name: "T-shirt basique",
+            price: "29.99",
+            img: "images/tshirt1.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "T-shirt coton",
+            price: "19.99",
+            img: "images/tshirt2.jpg",
+          },
+          {
+            brand: "Nike",
+            name: "T-shirt sport",
+            price: "49.99",
+            img: "images/tshirt3.jpg",
+          },
+          {
+            brand: "Adidas",
+            name: "T-shirt slim",
+            price: "44.99",
+            img: "images/tshirt4.jpg",
+          },
+        ],
+        pantalons: [
+          {
+            brand: "Zara",
+            name: "Jean slim",
+            price: "79.99",
+            img: "images/pantalon1.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Pantalon cargo",
+            price: "64.99",
+            img: "images/pantalon2.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Pantalon large",
+            price: "89.99",
+            img: "images/pantalon3.jpg",
+          },
+          {
+            brand: "Levi's",
+            name: "501 Original",
+            price: "129.99",
+            img: "images/pantalon4.jpg",
+          },
+        ],
+        vestes: [
+          {
+            brand: "Zara",
+            name: "Veste en jean",
+            price: "119.99",
+            img: "images/veste1.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Blazer casual",
+            price: "99.99",
+            img: "images/veste2.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Veste légère",
+            price: "109.99",
+            img: "images/veste3.jpg",
+          },
+          {
+            brand: "Nike",
+            name: "Coupe-vent",
+            price: "89.99",
+            img: "images/veste4.jpg",
+          },
+        ],
+      };
+
+      const titles = {
+        robes: "Robes",
+        tshirts: "T-shirts",
+        pantalons: "Pantalons",
+        vestes: "Vestes",
+      };
+
+      function showCat(key, el) {
+        document
+          .querySelectorAll(".sidebar li")
+          .forEach((li) => li.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("catTitle").textContent = titles[key];
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products[key]
+          .map(
+            (p) => `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}" onerror="this.style.background='#f0e8f5';this.style.height='200px'" />
+          <div class="card-body">
+            <div class="card-brand">${p.brand}</div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-price">${p.price} DT</div>
+            <a href="#" class="card-btn">Ajouter au panier</a>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      showCat("robes", document.querySelector(".sidebar li"));
+    </script>
+  </body>
+</html>
