@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessoires - Mimi Shopping</title>
+    <link rel="stylesheet" href="style5.css" />
+  </head>
+  <body>
+    <div class="top">
+      <a class="actif" href="store.html">ACCUEIL</a>
+      <div class="top-right">
+        <select onchange="window.location.href=this.value">
+          <option value="skincare.html">soin de peau</option>
+          <option value="makeup.html">maquillage</option>
+          <option value="clothes.html">vetements</option>
+          <option value="accessoires.html" selected>accessoires</option>
+        </select>
+        <input type="search" placeholder="search..." />
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <h3>Catégories</h3>
+        <ul>
+          <li class="active" onclick="showCat('sacs', this)">Sacs</li>
+          <li onclick="showCat('chaussures', this)">Chaussures</li>
+          <li onclick="showCat('bijoux', this)">Bijoux</li>
+          <li onclick="showCat('ceintures', this)">Ceintures</li>
+          <li onclick="showCat('lunettes', this)">Lunettes</li>
+        </ul>
+      </div>
+
+      <div class="main">
+        <h2 id="catTitle">Sacs</h2>
+        <div class="grid" id="productGrid"></div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 Mimi Shopping — Tous droits réservés</footer>
+
+    <script>
+      const products = {
+        sacs: [
+          {
+            brand: "Zara",
+            name: "Sac à main cuir",
+            price: "129.99",
+            img: "images/sac1.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Sac bandoulière",
+            price: "99.99",
+            img: "images/sac2.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Tote bag",
+            price: "49.99",
+            img: "images/sac3.jpg",
+          },
+          {
+            brand: "Guess",
+            name: "Sac cabas",
+            price: "189.99",
+            img: "images/sac4.jpg",
+          },
+        ],
+        chaussures: [
+          {
+            brand: "Zara",
+            name: "Escarpins classiques",
+            price: "119.99",
+            img: "images/chaussure1.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Sandales été",
+            price: "59.99",
+            img: "images/chaussure2.jpg",
+          },
+          {
+            brand: "Nike",
+            name: "Sneakers Air",
+            price: "159.99",
+            img: "images/chaussure3.jpg",
+          },
+          {
+            brand: "Adidas",
+            name: "Stan Smith",
+            price: "149.99",
+            img: "images/chaussure4.jpg",
+          },
+        ],
+        bijoux: [
+          {
+            brand: "Zara",
+            name: "Collier doré",
+            price: "39.99",
+            img: "images/bijou1.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Boucles d'oreilles",
+            price: "29.99",
+            img: "images/bijou2.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Bracelet fin",
+            price: "19.99",
+            img: "images/bijou3.jpg",
+          },
+          {
+            brand: "Guess",
+            name: "Bague argent",
+            price: "49.99",
+            img: "images/bijou4.jpg",
+          },
+        ],
+        ceintures: [
+          {
+            brand: "Zara",
+            name: "Ceinture cuir noir",
+            price: "49.99",
+            img: "images/ceinture1.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Ceinture tressée",
+            price: "39.99",
+            img: "images/ceinture2.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Ceinture large",
+            price: "29.99",
+            img: "images/ceinture3.jpg",
+          },
+          {
+            brand: "Guess",
+            name: "Ceinture logo",
+            price: "79.99",
+            img: "images/ceinture4.jpg",
+          },
+        ],
+        lunettes: [
+          {
+            brand: "Ray-Ban",
+            name: "Wayfarer classique",
+            price: "199.99",
+            img: "images/lunette1.jpg",
+          },
+          {
+            brand: "Zara",
+            name: "Lunettes cat-eye",
+            price: "49.99",
+            img: "images/lunette2.jpg",
+          },
+          {
+            brand: "H&M",
+            name: "Lunettes rondes",
+            price: "34.99",
+            img: "images/lunette3.jpg",
+          },
+          {
+            brand: "Mango",
+            name: "Lunettes aviateur",
+            price: "59.99",
+            img: "images/lunette4.jpg",
+          },
+        ],
+      };
+
+      const titles = {
+        sacs: "Sacs",
+        chaussures: "Chaussures",
+        bijoux: "Bijoux",
+        ceintures: "Ceintures",
+        lunettes: "Lunettes",
+      };
+
+      function showCat(key, el) {
+        document
+          .querySelectorAll(".sidebar li")
+          .forEach((li) => li.classList.remove("active"));
+        el.classList.add("active");
+        document.getElementById("catTitle").textContent = titles[key];
+        const grid = document.getElementById("productGrid");
+        grid.innerHTML = products[key]
+          .map(
+            (p) => `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}" onerror="this.style.background='#f0e8f5';this.style.height='200px'" />
+          <div class="card-body">
+            <div class="card-brand">${p.brand}</div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-price">${p.price} DT</div>
+            <a href="#" class="card-btn">Ajouter au panier</a>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      showCat("sacs", document.querySelector(".sidebar li"));
+    </script>
+  </body>
+</html>
