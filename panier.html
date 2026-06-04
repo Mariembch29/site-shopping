@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panier - Mimi Shopping</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f9f4fc; }
+
+    .top {
+      background: linear-gradient(135deg, #7c3aed, #c026d3);
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      gap: 16px;
+    }
+    .top a.actif {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .top-right {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      gap: 16px;
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      color: white;
+      font-size: 22px;
+      text-decoration: none;
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #f59e0b;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+    h1 { font-size: 24px; color: #4c1d95; margin-bottom: 24px; font-weight: 700; }
+
+    .empty { text-align: center; padding: 60px 20px; color: #9ca3af; }
+    .empty p { font-size: 18px; margin-bottom: 16px; }
+    .empty a { color: #7c3aed; text-decoration: none; font-weight: 600; }
+
+    .panier-item {
+      background: white;
+      border: 1px solid #f3e8ff;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .panier-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #f3e8ff;
+    }
+    .item-info { flex: 1; }
+    .item-brand { font-size: 11px; color: #a78bfa; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .item-name { font-size: 15px; font-weight: 600; color: #1f2937; margin: 4px 0; }
+    .item-price { font-size: 15px; font-weight: 700; color: #7c3aed; }
+    .item-qty {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+      font-weight: 700;
+    }
+    .qty-btn:hover { background: #f3e8ff; }
+    .qty-num { font-size: 15px; font-weight: 600; min-width: 20px; text-align: center; }
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .total-box {
+      background: white;
+      border: 1px solid #f3e8ff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    .total-final {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 700;
+      color: #4c1d95;
+      border-top: 2px solid #f3e8ff;
+      padding-top: 12px;
+      margin-top: 8px;
+    }
+    .commander-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #7c3aed, #c026d3);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      text-align: center;
+      text-decoration: none;
+    }
+    .commander-btn:hover { opacity: 0.9; }
+    .vider-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: white;
+      color: #ef4444;
+      border: 1.5px solid #ef4444;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .vider-btn:hover { background: #fef2f2; }
+  </style>
+</head>
+<body>
+
+  <div class="top">
+    <a class="actif" href="store.html">STORE</a>
+    <div class="top-right">
+      <a class="cart-icon" href="panier.html">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>🛒 Mon Panier</h1>
+    <div id="panierContent"></div>
+  </div>
+
+  <script>
+    function getPanier() {
+      return JSON.parse(localStorage.getItem('panier')) || [];
+    }
+
+    function savePanier(panier) {
+      localStorage.setItem('panier', JSON.stringify(panier));
+    }
+
+    function updateCartCount() {
+      const panier = getPanier();
+      const total = panier.reduce((sum, item) => sum + item.quantite, 0);
+      document.getElementById('cartCount').textContent = total;
+    }
+
+    function renderPanier() {
+      const panier = getPanier();
+      const content = document.getElementById('panierContent');
+
+      if (panier.length === 0) {
+        content.innerHTML = `
+          <div class="empty">
+            <p>🛒 Votre panier est vide</p>
+            <a href="store.html">Continuer vos achats</a>
+          </div>`;
+        return;
+      }
+
+      let total = 0;
+      let html = '';
+
+      panier.forEach((item, index) => {
+        const sousTotal = item.prix * item.quantite;
+        total += sousTotal;
+        html += `
+          <div class="panier-item">
+            <img src="${item.image}" alt="${item.nom}" onerror="this.style.background='#f3e8ff'" />
+            <div class="item-info">
+              <div class="item-brand">${item.marque}</div>
+              <div class="item-name">${item.nom}</div>
+              <div class="item-price">${sousTotal.toFixed(2)} DT</div>
+            </div>
+            <div class="item-qty">
+              <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+              <span class="qty-num">${item.quantite}</span>
+              <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+            </div>
+            <button class="delete-btn" onclick="supprimerItem(${index})">🗑️</button>
+          </div>`;
+      });
+
+      html += `
+        <div class="total-box">
+          <div class="total-row"><span>Sous-total</span><span>${total.toFixed(2)} DT</span></div>
+          <div class="total-row"><span>Livraison</span><span>Gratuite</span></div>
+          <div class="total-final"><span>Total</span><span>${total.toFixed(2)} DT</span></div>
+          <a href="#" class="commander-btn" onclick="commander()">Confirmer la commande</a>
+          <button class="vider-btn" onclick="viderPanier()">Vider le panier</button>
+        </div>`;
+
+      content.innerHTML = html;
+    }
+
+    function changeQty(index, delta) {
+      const panier = getPanier();
+      panier[index].quantite += delta;
+      if (panier[index].quantite <= 0) panier.splice(index, 1);
+      savePanier(panier);
+      updateCartCount();
+      renderPanier();
+    }
+
+    function supprimerItem(index) {
+      const panier = getPanier();
+      panier.splice(index, 1);
+      savePanier(panier);
+      updateCartCount();
+      renderPanier();
+    }
+
+    function viderPanier() {
+      if (confirm("Vider le panier ?")) {
+        localStorage.removeItem('panier');
+        updateCartCount();
+        renderPanier();
+      }
+    }
+
+    function commander() {
+      alert("Commande confirmée ! Merci pour votre achat 🎉");
+      localStorage.removeItem('panier');
+      updateCartCount();
+      renderPanier();
+    }
+
+    updateCartCount();
+    renderPanier();
+  </script>
+
+</body>
+</html>

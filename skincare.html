@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skin Care - Mimi Shopping</title>
     <link rel="stylesheet" href="style3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
+  <script src="cart.js"></script>
   <body>
     <div class="top">
       <a class="actif" href="store.html">ACCUEIL</a>
@@ -19,6 +24,10 @@
         <input type="search" placeholder="search..." />
       </div>
     </div>
+    <a class="cart-icon" href="panier.html">
+      <i class="fas fa-shopping-bag"></i>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
 
     <div class="layout">
       <div class="sidebar">
@@ -200,7 +209,7 @@
             <div class="card-brand">${p.brand}</div>
             <div class="card-name">${p.name}</div>
             <div class="card-price">${p.price} DT</div>
-            <a href="#" class="card-btn">Ajouter au panier</a>
+            <button class="card-btn" onclick="ajouterAuPanier('${p.name}','${p.brand}',${p.price},'${p.img}')">+ Panier</button>
           </div>
         </div>
       `

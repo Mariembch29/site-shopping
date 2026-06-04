@@ -1,149 +1,457 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-    <link rel="stylesheet" href="style1.css" />
+    <title>Mimi Shopping</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- NAVBAR -->
     <div class="top">
-      <a class="actif" href="#">ACCUEIL</a>
+      <a class="actif" href="store.html">STORE</a>
       <div class="top-right">
-        <select name="sel" id="sel" onchange="window.location.href=this.value">
-          <option value="">categories</option>
-          <option value="skincare.html">soin de peau</option>
-          <option value="maquillage.html">maquillage</option>
-          <option value="clothes.html">vetements</option>
-          <option value="accessoires.html">accessoires</option>
-        </select>
-        <input type="search" placeholder="search..." />
+        <div class="nav-bar">
+          <select onchange="window.location.href=this.value">
+            <option value="store.html">Toutes catégories</option>
+            <option value="skincare.html">skin care</option>
+            <option value="maquillage.html">make up</option>
+            <option value="clothes.html">clothes</option>
+            <option value="accessoires.html">accessoires</option>
+          </select>
+          <div class="nav-sep"></div>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Rechercher..."
+            oninput="rechercherProduits(this.value)"
+          />
+        </div>
+        <a class="cart-icon" href="panier.html">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
       </div>
     </div>
 
-    <!-- HERO -->
     <div class="hero">
       <h1>Mimi Shopping</h1>
       <p>Découvrez nos meilleures offres du moment</p>
     </div>
 
-    <!-- SECTION SKIN CARE -->
-    <div class="section-title">Skin Care</div>
-    <div class="grid">
-      <div class="card">
-        <img src="creme.jfif" alt="Crème hydratante" />
-        <div class="card-body">
-          <div class="card-name">Crème hydratante</div>
-          <div class="card-price">29.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="gel.jfif" alt="Gel nettoyant" />
-        <div class="card-body">
-          <div class="card-name">Gel nettoyant</div>
-          <div class="card-price">19.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="sol.jfif" alt="Crème solaire" />
-        <div class="card-body">
-          <div class="card-name">Crème solaire SPF50</div>
-          <div class="card-price">34.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
-        </div>
-      </div>
+    <div id="searchResults" style="padding: 0 24px; display: none">
+      <div class="section-title">Résultats de recherche</div>
+      <div class="grid" id="searchGrid"></div>
     </div>
 
-    <!-- SECTION MAKE UP -->
-    <div class="section-title">Make Up</div>
-    <div class="grid">
-      <div class="card">
-        <img src="rouge.jfif" alt="Rouge à lèvres" />
-        <div class="card-body">
-          <div class="card-name">Rouge à lèvres</div>
-          <div class="card-price">24.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+    <div id="mainContent">
+      <div class="section-title">Make Up</div>
+      <div class="grid">
+        <div class="card">
+          <img
+            src="images/fond1.jpg"
+            alt="Fond de teint"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">L'Oréal</div>
+            <div class="card-name">Infaillible 24H</div>
+            <div class="card-footer">
+              <span class="card-price">42.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Infaillible 24H','L\'Oréal',42.99,'images/fond1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/rouge1.jpg"
+            alt="Rouge à lèvres"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Maybelline</div>
+            <div class="card-name">SuperStay 24H</div>
+            <div class="card-footer">
+              <span class="card-price">22.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('SuperStay 24H','Maybelline',22.99,'images/rouge1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/mascara1.jpg"
+            alt="Mascara"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">L'Oréal</div>
+            <div class="card-name">Voluminous</div>
+            <div class="card-footer">
+              <span class="card-price">29.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Voluminous','L\'Oréal',29.99,'images/mascara1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <img src="masc.jfif" alt="Mascara" />
-        <div class="card-body">
-          <div class="card-name">Mascara volume</div>
-          <div class="card-price">18.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+      <div class="section-title">Skin Care</div>
+      <div class="grid">
+        <div class="card">
+          <img
+            src="images/creme1.jpg"
+            alt="Crème"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Neutrogena</div>
+            <div class="card-name">Hydro Boost</div>
+            <div class="card-footer">
+              <span class="card-price">49.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Hydro Boost','Neutrogena',49.99,'images/creme1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/serum1.jpg"
+            alt="Sérum"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">L'Oréal</div>
+            <div class="card-name">Revitalift Serum</div>
+            <div class="card-footer">
+              <span class="card-price">59.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Revitalift Serum','L\'Oréal',59.99,'images/serum1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/solaire1.jpg"
+            alt="Crème solaire"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">La Roche-Posay</div>
+            <div class="card-name">Anthelios SPF50+</div>
+            <div class="card-footer">
+              <span class="card-price">59.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Anthelios SPF50+','La Roche-Posay',59.99,'images/solaire1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <img src="font.jfif" alt="Fond de teint" />
-        <div class="card-body">
-          <div class="card-name">Fond de teint</div>
-          <div class="card-price">39.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+      <div class="section-title">Clothes</div>
+      <div class="grid">
+        <div class="card">
+          <img
+            src="images/robe1.jpg"
+            alt="Robe"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">Robe d'été fleurie</div>
+            <div class="card-footer">
+              <span class="card-price">89.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Robe d\'été fleurie','Zara',89.99,'images/robe1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/tshirt1.jpg"
+            alt="T-shirt"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">T-shirt basique</div>
+            <div class="card-footer">
+              <span class="card-price">29.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('T-shirt basique','Zara',29.99,'images/tshirt1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            src="images/veste1.jpg"
+            alt="Veste"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">Veste en jean</div>
+            <div class="card-footer">
+              <span class="card-price">119.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Veste en jean','Zara',119.99,'images/veste1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- SECTION CLOTHES -->
-    <div class="section-title">Clothes</div>
-    <div class="grid">
-      <div class="card">
-        <img src="robe.jfif" alt="Robe d'été" />
-        <div class="card-body">
-          <div class="card-name">Robe d'été</div>
-          <div class="card-price">59.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+      <div class="section-title">Accessoires</div>
+      <div class="grid">
+        <div class="card">
+          <img
+            src="images/sac1.jpg"
+            alt="Sac"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">Sac à main cuir</div>
+            <div class="card-footer">
+              <span class="card-price">129.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Sac à main cuir','Zara',129.99,'images/sac1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="card">
-        <img src="tg.jfif" alt="T-shirt coton" />
-        <div class="card-body">
-          <div class="card-name">T-shirt coton</div>
-          <div class="card-price">24.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+        <div class="card">
+          <img
+            src="images/chaussure1.jpg"
+            alt="Chaussures"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">Escarpins classiques</div>
+            <div class="card-footer">
+              <span class="card-price">119.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Escarpins classiques','Zara',119.99,'images/chaussure1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="card">
-        <img src="ve.jfif" alt="Veste légère" />
-        <div class="card-body">
-          <div class="card-name">Veste légère</div>
-          <div class="card-price">89.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION SOCKS -->
-    <div class="section-title">Accecoires</div>
-    <div class="grid">
-      <div class="card">
-        <img src="dore.jfif" alt="jewerly" />
-        <div class="card-body">
-          <div class="card-name">doré</div>
-          <div class="card-price">9.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="arg.jfif" alt="gerg" />
-        <div class="card-body">
-          <div class="card-name">argent</div>
-          <div class="card-price">12.99 DT</div>
-          <a href="#" class="card-btn">Ajouter au panier</a>
+        <div class="card">
+          <img
+            src="images/bijou1.jpg"
+            alt="Bijoux"
+            onerror="this.style.background='#f3e8ff'"
+          />
+          <div class="card-body">
+            <div class="card-brand">Zara</div>
+            <div class="card-name">Collier doré</div>
+            <div class="card-footer">
+              <span class="card-price">39.99 DT</span>
+              <button
+                class="card-btn"
+                onclick="ajouterAuPanier('Collier doré','Zara',39.99,'images/bijou1.jpg')"
+              >
+                + Panier
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <footer>&copy; 2026 Mimi Shopping — Tous droits réservés</footer>
+
+    <script>
+      // Tous les produits pour la recherche
+      const tousLesProduits = [
+        {
+          nom: "Infaillible 24H",
+          marque: "L'Oréal",
+          prix: 42.99,
+          img: "images/fond1.jpg",
+        },
+        {
+          nom: "SuperStay 24H",
+          marque: "Maybelline",
+          prix: 22.99,
+          img: "images/rouge1.jpg",
+        },
+        {
+          nom: "Voluminous",
+          marque: "L'Oréal",
+          prix: 29.99,
+          img: "images/mascara1.jpg",
+        },
+        {
+          nom: "Hydro Boost",
+          marque: "Neutrogena",
+          prix: 49.99,
+          img: "images/creme1.jpg",
+        },
+        {
+          nom: "Revitalift Serum",
+          marque: "L'Oréal",
+          prix: 59.99,
+          img: "images/serum1.jpg",
+        },
+        {
+          nom: "Anthelios SPF50+",
+          marque: "La Roche-Posay",
+          prix: 59.99,
+          img: "images/solaire1.jpg",
+        },
+        {
+          nom: "Robe d'été fleurie",
+          marque: "Zara",
+          prix: 89.99,
+          img: "images/robe1.jpg",
+        },
+        {
+          nom: "T-shirt basique",
+          marque: "Zara",
+          prix: 29.99,
+          img: "images/tshirt1.jpg",
+        },
+        {
+          nom: "Veste en jean",
+          marque: "Zara",
+          prix: 119.99,
+          img: "images/veste1.jpg",
+        },
+        {
+          nom: "Sac à main cuir",
+          marque: "Zara",
+          prix: 129.99,
+          img: "images/sac1.jpg",
+        },
+        {
+          nom: "Escarpins classiques",
+          marque: "Zara",
+          prix: 119.99,
+          img: "images/chaussure1.jpg",
+        },
+        {
+          nom: "Collier doré",
+          marque: "Zara",
+          prix: 39.99,
+          img: "images/bijou1.jpg",
+        },
+      ];
+
+      function rechercherProduits(query) {
+        const searchResults = document.getElementById("searchResults");
+        const mainContent = document.getElementById("mainContent");
+        const searchGrid = document.getElementById("searchGrid");
+
+        if (query.trim() === "") {
+          searchResults.style.display = "none";
+          mainContent.style.display = "block";
+          return;
+        }
+
+        mainContent.style.display = "none";
+        searchResults.style.display = "block";
+
+        const resultats = tousLesProduits.filter(
+          (p) =>
+            p.nom.toLowerCase().includes(query.toLowerCase()) ||
+            p.marque.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (resultats.length === 0) {
+          searchGrid.innerHTML =
+            '<p style="color:#9ca3af;padding:20px;">Aucun produit trouvé.</p>';
+          return;
+        }
+
+        searchGrid.innerHTML = resultats
+          .map(
+            (p) => `
+        <div class="card">
+          <img src="${p.img}" alt="${
+              p.nom
+            }" onerror="this.style.background='#f3e8ff'"/>
+          <div class="card-body">
+            <div class="card-brand">${p.marque}</div>
+            <div class="card-name">${p.nom}</div>
+            <div class="card-footer">
+              <span class="card-price">${p.prix.toFixed(2)} DT</span>
+              <button class="card-btn" onclick="ajouterAuPanier('${p.nom}','${
+              p.marque
+            }',${p.prix},'${p.img}')">+ Panier</button>
+            </div>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      function ajouterAuPanier(nom, marque, prix, image) {
+        let panier = JSON.parse(localStorage.getItem("panier")) || [];
+        const index = panier.findIndex((p) => p.nom === nom);
+        if (index >= 0) {
+          panier[index].quantite++;
+        } else {
+          panier.push({ nom, marque, prix, image, quantite: 1 });
+        }
+        localStorage.setItem("panier", JSON.stringify(panier));
+        updateCartCount();
+        alert(nom + " ajouté au panier !");
+      }
+
+      function updateCartCount() {
+        const panier = JSON.parse(localStorage.getItem("panier")) || [];
+        const total = panier.reduce((sum, item) => sum + item.quantite, 0);
+        document.getElementById("cartCount").textContent = total;
+      }
+
+      updateCartCount();
+    </script>
   </body>
 </html>
